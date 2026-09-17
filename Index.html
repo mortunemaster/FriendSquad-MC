@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FriendSquad | Modpacks</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080a0f;
+            --panel-bg: #111622;
+            --accent-color: #ff9f1c;
+            --text-color: #949eb4;
+            --text-bright: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.06);
+            
+            --adventure-color: #f15bb5;
+            --tech-color: #2ec4b6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-bright);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .section-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--text-bright);
+            text-transform: uppercase;
+        }
+
+        /* ДВУХКОЛОНОЧНАЯ СЕТКА БЕЗ СБОЕВ */
+        .legacy-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 20px 0px;
+            margin-bottom: 50px;
+            table-layout: fixed;
+        }
+
+        .legacy-table td {
+            width: 50%;
+            vertical-align: top;
+        }
+
+        .column-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .title-adventure { color: var(--adventure-color); }
+        .title-tech { color: var(--tech-color); }
+
+        .column-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Плашки сборок */
+        .item-row {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            clear: both;
+        }
+
+        .item-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-row:hover {
+            border-color: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .item-logo {
+            float: left;
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .item-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            float: left;
+            width: calc(100% - 110px);
+            text-align: center;
+            padding-top: 2px;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-bright);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .item-meta {
+            font-size: 11px;
+            color: var(--text-color);
+            opacity: 0.5;
+        }
+
+        .btn-download {
+            float: right;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-bright);
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .btn-download:hover {
+            background: var(--text-bright);
+            color: #000;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(201, 209, 217, 0.2);
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">FriendSquad <span>Hub</span></a>
+        </header>
+
+        <h2 class="section-title">Сборки Модов</h2>
+
+        <table class="legacy-table">
+            <tr>
+                
+                <td>
+                    <div class="column-title title-adventure">⚙️ Наши Сборки</div>
+                    <div class="column-box">
+
+                    <div style="text-align: center; padding: 30px 10px; color: var(--text-color); opacity: 0.6; font-size: 14px;">
+                    У нас еще нету сборок модов :(
+                    </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="column-title title-tech">⚙️ Неофициальные патчи</div>
+                    <div class="column-box">
+
+                        <div class="item-row">
+                            <div class="item-logo" style="background: transparent; display: flex; align-items: center; justify-content: center;">
+                                <img src="img/gtcp.png" alt="logo" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen;" onerror=             "this.src='https://placehold.co'">
+                         </div>
+    
+                            <div class="item-details" style="padding-top: 0;">
+                                <div class="item-title">GregTech Community Pack (Patch)</div>
+                                <div class="item-meta" style="margin-bottom: 2px;">v1.12.2</div>
+
+                             <a href="https://www.curseforge.com/minecraft/modpacks/gregtech-community-pack" target="_blank" style="color: #f16436;             text-decoration: none; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="               round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline              points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                 CurseForge →
+                                </a>
+                            </div>
+    
+                            <a href="https://drive.google.com/file/d/1l3Rq5lbdgUEucgQNXztwVKL8AoTfQ6py/view?usp=sharing" class="btn-download" target="_blank" rel="noopener noreferrer">Скачать</a>
+                        </div>
+
+                    </div>
+                </td>               
+
+            </tr>
+        </table>
+
+        <footer>
+            <p>&copy; 2026 FriendSquad Minecraft Hub. Contact friendsquadmcportal@gmail.com</p>
+        </footer>
+    </div>
+
+</body>
+</html>
