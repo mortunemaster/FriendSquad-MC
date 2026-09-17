@@ -67,18 +67,16 @@
             text-transform: uppercase;
         }
 
-        /* ДВУХКОЛОНОЧНАЯ СЕТКА БЕЗ СБОЕВ */
-        .legacy-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 20px 0px;
+        /* СОВРЕМЕННАЯ АДАПТИВНАЯ СЕТКА ДЛЯ КОЛОНОК */
+        .columns-container {
+            display: flex;
+            gap: 20px;
             margin-bottom: 50px;
-            table-layout: fixed;
         }
 
-        .legacy-table td {
-            width: 50%;
-            vertical-align: top;
+        .column-item {
+            flex: 1;
+            min-width: 0; /* Защита от выламывания текста */
         }
 
         .column-title {
@@ -99,17 +97,19 @@
             border-radius: 16px;
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
         }
 
-        /* Плашки сборок */
+        /* СОВРЕМЕННЫЙ FLEXBOX ДЛЯ ПЛАШЕК СБОРОК */
         .item-row {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             padding: 12px;
             margin-bottom: 12px;
-            overflow: hidden;
-            clear: both;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .item-row:last-child {
@@ -122,26 +122,28 @@
         }
 
         .item-logo {
-            float: left;
             width: 44px;
             height: 44px;
             border-radius: 6px;
             overflow: hidden;
-            background: #000;
+            background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0; /* Логотип не будет сжиматься */
         }
 
         .item-logo img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            mix-blend-mode: screen;
         }
 
         .item-details {
-            float: left;
-            width: calc(100% - 110px);
-            text-align: center;
-            padding-top: 2px;
+            flex-grow: 1;
+            min-width: 0;
         }
 
         .item-title {
@@ -159,8 +161,18 @@
             opacity: 0.5;
         }
 
+        .link-curseforge {
+            color: #f16436;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-top: 2px;
+        }
+
         .btn-download {
-            float: right;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-bright);
@@ -169,7 +181,9 @@
             text-decoration: none;
             font-size: 11px;
             font-weight: 700;
-            margin-top: 6px;
+            white-shrink: 0;
+            display: inline-block;
+            text-align: center;
         }
 
         .btn-download:hover {
@@ -184,6 +198,48 @@
             color: rgba(201, 209, 217, 0.2);
             padding-bottom: 20px;
         }
+
+        /* 📱 МОБИЛЬНЫЕ СТИЛИ (Экраны меньше 768px) */
+        @media (max-width: 768px) {
+            body {
+                padding: 25px 10px;
+            }
+
+            /* Колонки встают друг под друга */
+            .columns-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* Элементы внутри плашки перестраиваются */
+            .item-row {
+                flex-wrap: wrap; /* Разрешаем перенос элементов */
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .item-details {
+                width: calc(100% - 65px); /* Текст занимает оставшееся место рядом с лого */
+                flex-grow: 0;
+            }
+
+            /* Кнопка скачать сбрасывается на новую строку */
+            .btn-download {
+                width: 100%;
+                order: 2; /* Ставим в самый низ блока */
+                padding: 10px;
+            }
+
+            /* Оранжевая ссылка сбрасывается под кнопку скачать */
+            .link-curseforge {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                order: 3; /* Встает строго ПОД кнопкой скачать */
+                margin-top: 8px;
+                padding: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -195,46 +251,48 @@
 
         <h2 class="section-title">Сборки Модов</h2>
 
-        <table class="legacy-table">
-            <tr>
-                
-                <td>
-                    <div class="column-title title-adventure">⚙️ Наши Сборки</div>
-                    <div class="column-box">
-
+        <!-- Сетка на Flexbox вместо устаревшей таблицы -->
+        <div class="columns-container">
+            
+            <!-- Левая колонка -->
+            <div class="column-item">
+                <div class="column-title title-adventure">⚙️ Наши Сборки</div>
+                <div class="column-box">
                     <div style="text-align: center; padding: 30px 10px; color: var(--text-color); opacity: 0.6; font-size: 14px;">
-                    У нас еще нету сборок модов :(
+                        У нас еще нету сборок модов :(
                     </div>
-                    </div>
-                </td>
+                </div>
+            </div>
 
-                <td>
-                    <div class="column-title title-tech">⚙️ Неофициальные патчи</div>
-                    <div class="column-box">
+            <!-- Правая колонка -->
+            <div class="column-item">
+                <div class="column-title title-tech">⚙️ Неофициальные патчи</div>
+                <div class="column-box">
 
-                        <div class="item-row">
-                            <div class="item-logo" style="background: transparent; display: flex; align-items: center; justify-content: center;">
-                                <img src="img/gtcp.png" alt="logo" style="width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen;" onerror=             "this.src='https://placehold.co'">
-                         </div>
-    
-                            <div class="item-details" style="padding-top: 0;">
-                                <div class="item-title">GregTech Community Pack (Patch)</div>
-                                <div class="item-meta" style="margin-bottom: 2px;">v1.12.2</div>
-
-                             <a href="https://www.curseforge.com/minecraft/modpacks/gregtech-community-pack" target="_blank" style="color: #f16436;             text-decoration: none; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;">
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="               round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline              points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                 CurseForge →
-                                </a>
-                            </div>
-    
-                            <a href="https://drive.google.com/file/d/1l3Rq5lbdgUEucgQNXztwVKL8AoTfQ6py/view?usp=sharing" class="btn-download" target="_blank" rel="noopener noreferrer">Скачать</a>
+                    <div class="item-row">
+                        <div class="item-logo">
+                            <img src="img/gtcp.png" alt="logo" onerror="this.src='https://placehold.co'">
                         </div>
 
+  
+                        <div class="item-details">
+                            <div class="item-title">GregTech Community Pack (Patch)</div>
+                            <div class="item-meta">v1.12.2</div>
+                            
+                            <!-- Добавлен класс .link-curseforge для управления адаптивностью -->
+                            <a href="https://www.curseforge.com/minecraft/modpacks/gregtech-community-pack" target="_blank" class="link-curseforge">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                CurseForge →
+                            </a>
+                        </div>
+  
+                        <a href="https://google.com" class="btn-download" target="_blank" rel="noopener noreferrer">Скачать</a>
                     </div>
-                </td>               
 
-            </tr>
-        </table>
+                </div>
+            </div>               
+
+        </div>
 
         <footer>
             <p>&copy; 2026 FriendSquad Minecraft Hub. Contact friendsquadmcportal@gmail.com</p>
