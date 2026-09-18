@@ -109,8 +109,9 @@
             padding: 12px;
             margin-bottom: 12px;
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column; /* Элементы выстраиваются вертикально, чтобы вместить детали */
+            align-items: stretch;
+            gap: 0;
         }
 
         .item-row:last-child {
@@ -120,6 +121,14 @@
         .item-row:hover {
             border-color: rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Обертка для верхней части плашки (картинка, инфо, кнопка) */
+        .item-main-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
         }
 
         .item-logo {
@@ -182,7 +191,7 @@
             text-decoration: none;
             font-size: 11px;
             font-weight: 700;
-            white-shrink: 0;
+            flex-shrink: 0;
             display: inline-block;
             text-align: center;
         }
@@ -190,6 +199,50 @@
         .btn-download:hover {
             background: var(--text-bright);
             color: #000;
+        }
+
+        /* СТИЛИ ДЛЯ СКРЫТОГО БЛОКА И КНОПКИ ПОДРОБНЕЕ */
+        .more-info-details {
+            margin-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 8px;
+            width: 100%;
+        }
+
+        .btn-more {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-color);
+            opacity: 0.6;
+            cursor: pointer;
+            list-style: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .btn-more::-webkit-details-marker {
+            display: none;
+        }
+
+        .btn-more:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .more-info-content {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-color);
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .more-info-content ul {
+            margin-top: 6px;
+            padding-left: 18px;
         }
 
         footer {
@@ -212,22 +265,26 @@
                 gap: 30px;
             }
 
-            /* Элементы внутри плашки перестраиваются */
+            /* Внутренние отступы плашки */
             .item-row {
-                flex-wrap: wrap; /* Разрешаем перенос элементов */
-                gap: 10px;
                 padding: 15px;
             }
 
+            /* Элементы внутри верхней панели перестраиваются */
+            .item-main-info {
+                flex-wrap: wrap; 
+                gap: 10px;
+            }
+
             .item-details {
-                width: calc(100% - 65px); /* Текст занимает оставшееся место рядом с лого */
+                width: calc(100% - 65px); /* Занимает место рядом с лого */
                 flex-grow: 0;
             }
 
-            /* Кнопка скачать сбрасывается на новую строку */
+            /* Кнопка скачать на мобилках падает вниз во всю ширину */
             .btn-download {
                 width: 100%;
-                order: 2; /* Ставим в самый низ блока */
+                order: 2; 
                 padding: 10px;
             }
 
@@ -236,8 +293,19 @@
                 width: 100%;
                 text-align: center;
                 justify-content: center;
-                order: 3; /* Встает строго ПОД кнопкой скачать */
+                order: 3; 
                 margin-top: 8px;
+                padding: 5px 0;
+            }
+
+            /* Кнопка "Подробнее" падает в самый низ структуры на мобилках */
+            .more-info-details {
+                order: 4;
+            }
+            
+            .btn-more {
+                width: 100%;
+                text-align: center;
                 padding: 5px 0;
             }
         }
@@ -256,43 +324,94 @@
         <div class="columns-container">
             
             <!-- Левая колонка -->
-            <div class="column-item">
-                <div class="column-title title-adventure">⚙️ Наши Сборки</div>
+          <div class="column-item">
+                <div class="column-title title-adventure">⚙️ Наши Сборки ⚙️</div>
                 <div class="column-box">
-                    <div style="text-align: center; padding: 30px 10px; color: var(--text-color); opacity: 0.6; font-size: 14px;">
-                        У нас еще нету сборок модов :(
+
+                    <!-- Плашка нашей новой сборки -->
+                    <div class="item-row">
+                        <div class="item-main-info">
+                            <div class="item-logo">
+                            </div>
+
+                            <div class="item-details">
+                                <div class="item-title">GregTech FS</div>
+                                <div class="item-meta">v1.20.1 (В разработке)</div>
+                                
+                                <span style="color: var(--adventure-color); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;">
+                                    ✨ Собственная сборка
+                                </span>
+                            </div>
+      
+                            <span class="btn-download" style="background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.2); cursor: not-allowed;">Скоро</span>
+                        </div>
+
+                        <!-- Скрытое описание, разворачивает только этот контейнер -->
+                        <details class="more-info-details" name="modpack">
+                            <summary class="btn-more">Подробнее</summary>
+                            <div class="more-info-content">
+                                <p><strong>О сборке:</strong> Наш грядущий проект, сделаный на базе <code>GregTech Community Pack Modern</code>, что вас ждёт?</p>
+                                <ul>
+                                    <li>🗺️ Проработаная генерация мира.</li>
+                                    <li>💎 Десятки новых квестов, крафтов а также кастомных предметов.</li>
+                                    <li>🚀 Проработаный и сбалансированый игровой процес.</li>
+                                </ul>
+                                <ul></ul>
+                                <p>Сборка будет разбита по стадиям развития что сделает ее прохождения куда более интересным, продвигаться по которым вы сможете по мере выполнения квестов. Но не смотря на это куда более щадящий игровой процес нежели в <strong>GTNH</strong> или же <strong>TerraFirmaGreg</strong>.</p>
+                                <ul></ul>
+                                <p>Будем рады вашим идеям и предложениям, электронная почта проекта указана ниже на сайте.</p>
+                            </div>
+                        </details>
                     </div>
+
                 </div>
             </div>
 
             <!-- Правая колонка -->
             <div class="column-item">
-                <div class="column-title title-tech">⚙️ Неофициальные патчи</div>
+                <div class="column-title title-tech">⚙️ Неофициальные патчи ⚙️</div>
                 <div class="column-box">
 
+                    <!-- Плашка сборки -->
                     <div class="item-row">
-                        <div class="item-logo">
-                            <img src="img/gtcp.png" alt="logo" onerror="this.src='https://placehold.co'">
+                        <div class="item-main-info">
+                            <div class="item-logo">
+                                <img src="img/gtcp.png" alt="logo" onerror="this.src='https://placehold.co/44'">
+                            </div>
+
+                            <div class="item-details">
+                                <div class="item-title">GregTech Community Pack (Patch)</div>
+                                <div class="item-meta">v1.12.2-(1.0.1)</div>
+                                
+                                <a href="https://www.curseforge.com/minecraft/modpacks/gregtech-community-pack" target="_blank" class="link-curseforge">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    CurseForge →
+                                </a>
+                            </div>
+      
+                            <a href="https://docs.google.com/uc?export=download&id=1l3Rq5lbdgUEucgQNXztwVKL8AoTfQ6py" class="btn-download" target="_blank" rel="noopener noreferrer">Скачать</a>
                         </div>
 
-  
-                        <div class="item-details">
-                            <div class="item-title">GregTech Community Pack (Patch)</div>
-                            <div class="item-meta">v1.12.2 v1.0.1</div>
-                            
-                            <!-- Добавлен класс .link-curseforge для управления адаптивностью -->
-                            <a href="https://www.curseforge.com/minecraft/modpacks/gregtech-community-pack" target="_blank" class="link-curseforge">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                CurseForge →
-                            </a>
-                        </div>
-  
-                        <a href="https://drive.google.com/file/d/1l3Rq5lbdgUEucgQNXztwVKL8AoTfQ6py/view?usp=sharing" class="btn-download" target="_blank" rel="noopener noreferrer">Скачать</a>
+                        <details class="more-info-details">
+                            <summary class="btn-more">Подробнее</summary>
+                            <div class="more-info-content">
+                                <p><strong>О патче:</strong> Данный неофициальный патч был создан для того чтобы улучшить игровой процес. Он никак не перерабатывет крафты и квесты сборки, а также не добавляет никаких новых механик.</p>
+                                <p>Цель патча лишь сделать визуальную составляющую сборки немного лучше.</p>
+                                <ul>
+                                    <li>🔧 Исправлен бак с совместимостью для <code>Optifine</code> и шейдеров.</li>
+                                    <li>🌿 Текстуры игры и мода <code>GregTech</code> обновлены на их более современные варианты.</li>
+                                    <li>🌍 Обеспечивает стопроцентную совместимость с оригинальной серверной сборкой.</li>
+                                </ul>
+                                <ul></ul>
+                                <p>Это ище не финальная версия патча, сборка требует работы над отпимизацией..</p>
+                                <ul></ul>
+                                <p><strong>P.s:</strong> Несмотря на версию 1.12.2 и приличный возраст данной сборки, найдуться люди которые с радостью и чуством "чего-то давно забытого" ее пройдут. Хорошей вам игры!</p>
+                            </div>
+                        </details>
                     </div>
 
                 </div>
             </div>               
-
         </div>
 
         <footer>
